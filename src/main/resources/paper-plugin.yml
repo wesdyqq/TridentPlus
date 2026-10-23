@@ -1,0 +1,12 @@
+name: TridentPlus
+version: '1.0.0'
+main: dev.tridentplus.TridentPlusPlugin
+bootstrapper: dev.tridentplus.TridentPlusBootstrap
+api-version: '26.2'
+description: Makes the trident viable in PvP while staying balanced.
+author: TridentPlus
+load: STARTUP
+permissions:
+  tridentplus.admin:
+    description: Access to /tridentplus administration and test commands.
+    default: op

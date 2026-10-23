@@ -1,0 +1,59 @@
+# TridentPlus configuration.
+# Balance values are hot-reloadable with /tridentplus reload.
+# Registry-level values need a full server restart: the fork.display-name fallback
+# and the Sharpness/Looting item-set changes made by the bootstrapper.
+# The actual Fork name comes from the bundled resource pack:
+#   en_us = Fork, ru_ru = Нанизывание, rpr = Многонасажденіе.
+
+sharpness:
+  reference-max-damage: 11.0   # netherite sword + Sharpness V (8 + 3)
+  cap-offset: 2.0              # trident max melee = 11 + 2 = 13
+  melee-base: 9.0
+  thrown-base: 8.0
+  thrown-penalty-per-level: 1.0   # 0 = Sharpness never affects thrown damage
+  thrown-min-damage: 1.0
+
+fork:
+  # Fallback shown only when the client does not load resource-pack (or uses a
+  # locale without a translation). The pack supplies en_us/ru_ru/rpr names.
+  display-name: "Нанизывание"
+  secondary-damage-ratio: [0.5, 0.6667, 0.75]
+  radius-horizontal: 1.5
+  radius-vertical: 0.5
+  attacker-max-distance: 4.5
+  require-full-cooldown: true
+  allow-on-crit: false
+  allow-sprint-knockback: false   # vanilla sweep excludes sprint-knockback hits too
+  secondary-flat-bonus: 0.0       # added after ratio * primary raw damage
+  secondary-knockback-multiplier: 0.5
+  particles: true
+  sound: true
+
+looting:
+  # 26.2 applies Looting from the attacker's equipped item. A trident in flight is
+  # not equipped, and the Bukkit loot API cannot override that cleanly. Melee
+  # Looting works; thrown Looting is reported as a known limitation at runtime.
+  apply-to-thrown: true
+
+loot-injection:
+  enabled: true
+  tables:
+    "minecraft:chests/shipwreck_treasure": { chance: 0.10, level-weights: [60, 30, 10] }
+    "minecraft:chests/shipwreck_supply":   { chance: 0.05, level-weights: [70, 25, 5] }
+    "minecraft:chests/buried_treasure":    { chance: 0.12, level-weights: [60, 30, 10] }
+
+# The Fork name is a translatable client component. The plugin generates a tiny
+# resource pack with en_us (Fork), ru_ru (Нанизывание) and rpr
+# (Многонасажденіе) and serves it automatically.
+resource-pack:
+  enabled: true
+  port: 8123
+  host: ""          # hostname/IP only (no port); empty = use the player's connect host
+  # Full override for hosted/proxied servers. Upload the generated zip from
+  # plugins/TridentPlus/TridentPlus-resourcepack.zip to this URL.
+  # public-url: "https://example.com/TridentPlus-resourcepack.zip"
+  public-url: ""
+  prompt: "TridentPlus: примите ресурспак для русского названия зачарования."
+
+debug:
+  default: false
