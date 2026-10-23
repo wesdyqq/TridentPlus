@@ -309,7 +309,10 @@ view-distance=6
 
 A prebuilt jar is committed at `dist/TridentPlus-1.0.0.jar` (the matching
 `dist/TridentPlus-1.0.0.jar.sha256` is next to it), or build it yourself with
-`./gradlew build`. To use the plugin on a real server, drop the jar into `plugins/`. The first start creates
+`./gradlew build`. The exact pack generated at runtime is committed at
+`dist/TridentPlus-resourcepack.zip` (SHA-1 `b61798854743e49df331b1fc7d70c57e0ebb899b`),
+which is useful for `resource-pack.public-url` on hosts that block port 8123.
+Rebuild that file whenever the three lang files change. To use the plugin on a real server, drop the jar into `plugins/`. The first start creates
 `plugins/TridentPlus/config.yml` and
 `plugins/TridentPlus/TridentPlus-resourcepack.zip`, and serves the pack on TCP
 **8123**. Open that port in the firewall, or set `resource-pack.public-url` to an
